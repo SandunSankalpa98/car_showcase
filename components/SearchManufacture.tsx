@@ -1,7 +1,7 @@
 "use client";
 import { SearchManufactureProps } from '@/types';
 import React, { Fragment, useState } from 'react';
-import { Combobox, ComboboxButton, ComboboxInput, ComboboxOptions, Transition } from '@headlessui/react';
+import { Combobox, ComboboxButton, ComboboxInput, ComboboxOption, ComboboxOptions, Transition } from '@headlessui/react';
 import Image from 'next/image';
 import { manufacturers } from '@/constants';
 
@@ -46,17 +46,27 @@ const SearchManufacture = ({ manufacturer, setManufacturer }: SearchManufactureP
                 afterLeave={() => setQuery('')}
             >
                 <ComboboxOptions>
-                  {filterManufacturers.map((item) => (
-                    <Combobox.Option
-                      key={item}
-                      value={item}
-                      className={({ active }) => `relative search-manufacturer__option ${
-                        active ? 'bg-blue-500 text-white' : 'text-gray-900'
-                      }`}
-                    >
-                      {item}
-                    </Combobox.Option>
-                  ))}
+                  {filterManufacturers.length === 0 && query !== "" ? (
+                    <div className="search-manufacturer__no-results">
+                      No results found.
+                    </div>
+                  ) : (
+                    filterManufacturers.map((item) => (
+                      <ComboboxOption
+                        key={item}
+                        value={item}
+                        className={({ active }) => `relative search-manufacturer__option ${
+                          active ? 'bg-blue-500 text-white' : 'text-gray-900'
+                        }`}
+                      >
+                        {({ selected, active }) => (
+                          <span className={`block truncate ${selected ? 'font-medium' : 'font-normal'}`}>
+                            {item}
+                          </span>
+                        )}
+                      </ComboboxOption>
+                    ))
+                  )}
                 </ComboboxOptions>
             </Transition>
         </div>

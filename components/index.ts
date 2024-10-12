@@ -1,3 +1,4 @@
+import  CarCard  from '@/components/CarCard';
 import SearchBar from '@/components/SearchBar';
 import CustomFilter from '@/components/CustomFilter';
 import CustomButton from "./CustomButton";
@@ -15,5 +16,6 @@ export {
     CustomFilter,
     SearchBar,
     SearchManufacture,
+    CarCard,
     
 }
